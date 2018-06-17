@@ -20,9 +20,12 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginStart="10dp" />
+                android:layout_marginStart="10dp"
+                android:maxLength="@integer/tweetMaxSize"
+
+                />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -30,5 +33,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Tweetar" />
+        android:text="@string/tweetar" />
 </LinearLayout>

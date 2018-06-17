@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Twittelum-teste</string>
+    <string name="tweetar">Tweetar</string>
+    <string name="voltar">Voltar</string>
 </resources>
