@@ -2,11 +2,14 @@ package br.com.caelum.twittelum_teste.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.caelum.twittelum_teste.R;
@@ -24,6 +27,23 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.dbHelper = new TwittelumDbHelper(this);
+        EditText campoTexto = findViewById(R.id.form_tweet);
+        campoTexto.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                int total = getResources().getInteger(R.integer.tweetMaxSize);
+                TextView contador = findViewById(R.id.form_contador);
+                contador.setText ((total-count)+"/"+ total);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+
 
         Button botao = findViewById(R.id.form_botao);
         botao.setOnClickListener(new View.OnClickListener() {

@@ -2,4 +2,5 @@
     <string name="app_name">Twittelum-teste</string>
     <string name="tweetar">Tweetar</string>
     <string name="voltar">Voltar</string>
+    <string name="beginTweetCounter">280/280</string>
 </resources>
