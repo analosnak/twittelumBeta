@@ -29,14 +29,19 @@ public class FormActivity extends AppCompatActivity {
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FormActivity.this, "salvando..",Toast.LENGTH_SHORT).show();
-                Log.i("DB", "salvando...");
                 EditText campoTexto = findViewById(R.id.form_tweet);
                 String tweetMessage = campoTexto.getText().toString();
-                Tweet tweet = new Tweet();
-                tweet.setContent(tweetMessage);
-                TweetDAO dao = new TweetDAO(dbHelper);
-                dao.save(tweet);
+                if (tweetMessage.isEmpty()) {
+                    campoTexto.setError("O conteúdo do tweet não pode ser vazio");
+                } else {
+                    Tweet tweet = new Tweet();
+                    tweet.setContent(tweetMessage);
+                    TweetDAO dao = new TweetDAO(dbHelper);
+                    Toast.makeText(FormActivity.this, "salvando..",Toast.LENGTH_SHORT).show();
+                    Log.i("DB", "salvando...");
+                    dao.save(tweet);
+                    campoTexto.setText("");
+                }
             }
         });
     }
