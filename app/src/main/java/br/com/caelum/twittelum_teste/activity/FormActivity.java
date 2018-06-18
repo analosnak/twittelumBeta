@@ -2,65 +2,41 @@ package br.com.caelum.twittelum_teste.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.caelum.twittelum_teste.R;
 import br.com.caelum.twittelum_teste.dao.TweetDAO;
 import br.com.caelum.twittelum_teste.dao.TwittelumDbHelper;
-import br.com.caelum.twittelum_teste.modelo.Tweet;
+import br.com.caelum.twittelum_teste.dto.FormHelper;
 
 public class FormActivity extends AppCompatActivity {
 
     private TwittelumDbHelper dbHelper;
+    private FormHelper formHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.dbHelper = new TwittelumDbHelper(this);
-        EditText campoTexto = findViewById(R.id.form_tweet);
-        campoTexto.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        dbHelper = new TwittelumDbHelper(this);
+        formHelper = new FormHelper(this);
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                int total = getResources().getInteger(R.integer.tweetMaxSize);
-                TextView contador = findViewById(R.id.form_contador);
-                contador.setText ((total-count)+"/"+ total);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {}
-        });
-
-
-
-        Button botao = findViewById(R.id.form_botao);
+        Button botao = formHelper.getButton();
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText campoTexto = findViewById(R.id.form_tweet);
-                String tweetMessage = campoTexto.getText().toString();
-                if (tweetMessage.isEmpty()) {
-                    campoTexto.setError("O conteúdo do tweet não pode ser vazio");
+                if (formHelper.isEmptyContent()) {
+                    formHelper.showError();
                 } else {
-                    Tweet tweet = new Tweet();
-                    tweet.setContent(tweetMessage);
                     TweetDAO dao = new TweetDAO(dbHelper);
                     Toast.makeText(FormActivity.this, "salvando..",Toast.LENGTH_SHORT).show();
-                    Log.i("DB", "salvando...");
-                    dao.save(tweet);
-                    campoTexto.setText("");
+                    dao.save(formHelper.getTweet());
+                    formHelper.cleanInputs();
                 }
             }
         });
