@@ -1,5 +1,6 @@
 package br.com.caelum.twittelum_teste.activity;
 
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +30,7 @@ public class FormActivity extends AppCompatActivity {
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText campoTexto = findViewById(R.id.form_tweet);
+                TextInputEditText campoTexto = findViewById(R.id.form_tweet);
                 String tweetMessage = campoTexto.getText().toString();
                 if (tweetMessage.isEmpty()) {
                     campoTexto.setError("O conteúdo do tweet não pode ser vazio");
