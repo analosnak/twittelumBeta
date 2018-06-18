@@ -19,13 +19,13 @@ public class FormHelper {
     private final EditText contentInput;
     private final TextView counter;
     private final Button button;
-    private final int maxCharacters;
+    private final int maxChars;
 
     public FormHelper(FormActivity activity) {
         contentInput = activity.findViewById(R.id.form_tweet);
         counter = activity.findViewById(R.id.form_counter);
         button = activity.findViewById(R.id.form_button);
-        maxCharacters = activity.getResources().getInteger(R.integer.tweet_max_size);
+        maxChars = activity.getResources().getInteger(R.integer.tweet_max_size);
         this.addCounterListener();
     }
 
@@ -36,15 +36,18 @@ public class FormHelper {
     public void addCounterListener() {
         contentInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                counter.setText ((maxCharacters -count)+"/"+ maxCharacters);
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void onTextChanged(CharSequence charSequence, int wordBeginningPosition, int before, int numWordChars) {
+                int numWrittenChars = wordBeginningPosition + numWordChars;
+                counter.setText((maxChars - numWrittenChars) + "/" + maxChars);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
     }
