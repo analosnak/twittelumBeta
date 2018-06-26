@@ -17,5 +17,7 @@ public class TwittelumContract {
                 "(" + Tweet._ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_NAME_CONTENT + " TEXT NOT NULL)";
         public static final String SQL_DELETE_QUERY = "DROP TABLE IF EXISTS "+TABLE_NAME;
+        public static final String SQL_SELECT_ALL_QUERY = "SELECT * FROM ";
+
     }
 }

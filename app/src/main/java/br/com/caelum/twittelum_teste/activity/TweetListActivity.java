@@ -11,18 +11,30 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.caelum.twittelum_teste.R;
+import br.com.caelum.twittelum_teste.dao.TweetDAO;
+import br.com.caelum.twittelum_teste.dao.TwittelumDbHelper;
 import br.com.caelum.twittelum_teste.modelo.Tweet;
 
 public class TweetListActivity extends AppCompatActivity {
+
+    private TwittelumDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_list);
+        dbHelper = new TwittelumDbHelper(this);
 
+        List<Tweet> tweets = new TweetDAO(dbHelper).findAll();
+
+        ListAdapter adapter = new ArrayAdapter<Tweet>(this, android.R.layout.simple_list_item_1, tweets);
         ListView tweetList = findViewById(R.id.tweet_list);
-        List<String> tweetsText = Arrays.asList("Tweet legal", "Bom dia!", "Twwet do Neymar");
-        ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tweetsText);
         tweetList.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelper.close();
     }
 }
