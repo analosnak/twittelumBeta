@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import br.com.caelum.twittelum_teste.R;
-import br.com.caelum.twittelum_teste.activity.FormActivity;
+import br.com.caelum.twittelum_teste.activity.TweetFormActivity;
 import br.com.caelum.twittelum_teste.modelo.Tweet;
 
 /**
@@ -21,7 +21,7 @@ public class FormHelper {
     private final Button button;
     private final int maxChars;
 
-    public FormHelper(FormActivity activity) {
+    public FormHelper(TweetFormActivity activity) {
         contentInput = activity.findViewById(R.id.form_tweet);
         counter = activity.findViewById(R.id.form_counter);
         button = activity.findViewById(R.id.form_button);

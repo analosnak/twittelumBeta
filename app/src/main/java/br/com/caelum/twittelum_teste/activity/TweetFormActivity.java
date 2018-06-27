@@ -2,7 +2,6 @@ package br.com.caelum.twittelum_teste.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +9,9 @@ import android.widget.Toast;
 
 import br.com.caelum.twittelum_teste.R;
 import br.com.caelum.twittelum_teste.dao.TweetDAO;
-import br.com.caelum.twittelum_teste.dao.TwittelumDbHelper;
 import br.com.caelum.twittelum_teste.dto.FormHelper;
 
-public class FormActivity extends AppCompatActivity {
+public class TweetFormActivity extends AppCompatActivity {
 
     private FormHelper formHelper;
     private TweetDAO dao;
@@ -24,6 +22,7 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         formHelper = new FormHelper(this);
+        dao = new TweetDAO(TweetFormActivity.this);
 
         Button botao = formHelper.getButton();
         botao.setOnClickListener(new View.OnClickListener() {
@@ -32,10 +31,9 @@ public class FormActivity extends AppCompatActivity {
                 if (formHelper.isEmptyContent()) {
                     formHelper.showError();
                 } else {
-                    dao = new TweetDAO(FormActivity.this);
-                    Toast.makeText(FormActivity.this, "salvando..",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TweetFormActivity.this, "salvando..",Toast.LENGTH_SHORT).show();
                     dao.save(formHelper.getTweet());
-                    formHelper.cleanInputs();
+                    finish();
                 }
             }
         });
