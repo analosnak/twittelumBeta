@@ -34,18 +34,18 @@ public class TweetListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        Log.i("FUNDO_COR",Float.toString(Color.valueOf(button.getRippleColor()).blue()));
-//        Log.i("FUNDO_TINTURA",button.getBackgroundTintList().toString());
-//        Log.i("FUNDO_MODO_TINTURA",button.getBackgroundTintMode().toString());
-//        Log.i("FUNDO_COR",Integer.toString(button.getSolidColor()));
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         createList();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dao.close();
     }
 
     private void createList() {
@@ -53,11 +53,5 @@ public class TweetListActivity extends AppCompatActivity {
         ListAdapter adapter = new ArrayAdapter<Tweet>(this, android.R.layout.simple_list_item_1, tweets);
         ListView tweetList = findViewById(R.id.list_tweets);
         tweetList.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        dao.close();
     }
 }
