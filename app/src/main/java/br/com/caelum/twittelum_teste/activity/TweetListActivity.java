@@ -17,15 +17,16 @@ import br.com.caelum.twittelum_teste.modelo.Tweet;
 
 public class TweetListActivity extends AppCompatActivity {
 
-    private TwittelumDbHelper dbHelper;
+
+    private TweetDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_list);
-        dbHelper = new TwittelumDbHelper(this);
 
-        List<Tweet> tweets = new TweetDAO(dbHelper).findAll();
+        dao = new TweetDAO(this);
+        List<Tweet> tweets = dao.findAll();
 
         ListAdapter adapter = new ArrayAdapter<Tweet>(this, android.R.layout.simple_list_item_1, tweets);
         ListView tweetList = findViewById(R.id.tweet_list);
@@ -35,6 +36,6 @@ public class TweetListActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dbHelper.close();
+        dao.close();
     }
 }

@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import br.com.caelum.twittelum_teste.activity.TweetListActivity;
 import br.com.caelum.twittelum_teste.modelo.Tweet;
 
 import static br.com.caelum.twittelum_teste.dao.TwittelumContract.Tweet.COLUMN_NAME_CONTENT;
@@ -22,8 +22,8 @@ public class TweetDAO {
 
     private TwittelumDbHelper dbHelper;
 
-    public TweetDAO(TwittelumDbHelper dbHelper) {
-        this.dbHelper = dbHelper;
+    public TweetDAO(Context context) {
+        this.dbHelper = new TwittelumDbHelper(context);
     }
 
     public void save(Tweet tweet) {
@@ -42,5 +42,9 @@ public class TweetDAO {
             tweets.add(tweet);
         }
         return tweets;
+    }
+
+    public void close() {
+        dbHelper.close();
     }
 }

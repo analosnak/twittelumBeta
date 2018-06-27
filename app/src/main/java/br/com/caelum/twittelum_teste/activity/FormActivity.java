@@ -15,15 +15,14 @@ import br.com.caelum.twittelum_teste.dto.FormHelper;
 
 public class FormActivity extends AppCompatActivity {
 
-    private TwittelumDbHelper dbHelper;
     private FormHelper formHelper;
+    private TweetDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        dbHelper = new TwittelumDbHelper(this);
         formHelper = new FormHelper(this);
 
         Button botao = formHelper.getButton();
@@ -33,7 +32,7 @@ public class FormActivity extends AppCompatActivity {
                 if (formHelper.isEmptyContent()) {
                     formHelper.showError();
                 } else {
-                    TweetDAO dao = new TweetDAO(dbHelper);
+                    dao = new TweetDAO(FormActivity.this);
                     Toast.makeText(FormActivity.this, "salvando..",Toast.LENGTH_SHORT).show();
                     dao.save(formHelper.getTweet());
                     formHelper.cleanInputs();
@@ -53,7 +52,7 @@ public class FormActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        dbHelper.close();
+        dao.close();
         super.onDestroy();
     }
 }
