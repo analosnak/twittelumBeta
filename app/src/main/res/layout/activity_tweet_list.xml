@@ -15,5 +15,6 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/colorPrimary"
         app:tint="@android:color/white"/>
 </RelativeLayout>
