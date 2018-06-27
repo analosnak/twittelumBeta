@@ -1,18 +1,16 @@
 package br.com.caelum.twittelum_teste.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import java.util.Arrays;
 import java.util.List;
 
 import br.com.caelum.twittelum_teste.R;
 import br.com.caelum.twittelum_teste.dao.TweetDAO;
-import br.com.caelum.twittelum_teste.dao.TwittelumDbHelper;
 import br.com.caelum.twittelum_teste.modelo.Tweet;
 
 public class TweetListActivity extends AppCompatActivity {
@@ -29,8 +27,15 @@ public class TweetListActivity extends AppCompatActivity {
         List<Tweet> tweets = dao.findAll();
 
         ListAdapter adapter = new ArrayAdapter<Tweet>(this, android.R.layout.simple_list_item_1, tweets);
-        ListView tweetList = findViewById(R.id.tweet_list);
+        ListView tweetList = findViewById(R.id.list_tweets);
         tweetList.setAdapter(adapter);
+
+        FloatingActionButton button = findViewById(R.id.list_tweet_button);
+//        Log.i("FUNDO_COR",Float.toString(Color.valueOf(button.getRippleColor()).blue()));
+//        Log.i("FUNDO_TINTURA",button.getBackgroundTintList().toString());
+//        Log.i("FUNDO_MODO_TINTURA",button.getBackgroundTintMode().toString());
+//        Log.i("FUNDO_COR",Integer.toString(button.getSolidColor()));
+
     }
 
     @Override
