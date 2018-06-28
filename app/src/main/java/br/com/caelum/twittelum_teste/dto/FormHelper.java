@@ -1,10 +1,15 @@
 package br.com.caelum.twittelum_teste.dto;
 
+import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.time.LocalDateTime;
 
 import br.com.caelum.twittelum_teste.R;
 import br.com.caelum.twittelum_teste.activity.TweetFormActivity;
@@ -16,17 +21,25 @@ import br.com.caelum.twittelum_teste.modelo.Tweet;
 
 public class FormHelper {
 
+    private final ImageView photo;
+    private final FloatingActionButton imageButton;
     private final EditText contentInput;
     private final TextView counter;
     private final Button button;
     private final int maxChars;
 
     public FormHelper(TweetFormActivity activity) {
+        photo = activity.findViewById(R.id.form_image);
+        imageButton = activity.findViewById(R.id.form_image_button);
         contentInput = activity.findViewById(R.id.form_tweet);
         counter = activity.findViewById(R.id.form_counter);
         button = activity.findViewById(R.id.form_button);
         maxChars = activity.getResources().getInteger(R.integer.tweet_max_size);
         this.addCounterListener();
+    }
+
+    public FloatingActionButton getImageButton() {
+        return imageButton;
     }
 
     public Button getButton() {
@@ -55,6 +68,7 @@ public class FormHelper {
     public Tweet getTweet() {
         Tweet tweet = new Tweet();
         tweet.setContent(contentInput.getText().toString());
+        tweet.setPublishingDate(LocalDateTime.now());
 
         return tweet;
     }

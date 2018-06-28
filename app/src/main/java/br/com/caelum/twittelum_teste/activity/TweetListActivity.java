@@ -12,6 +12,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import br.com.caelum.twittelum_teste.R;
+import br.com.caelum.twittelum_teste.adapter.ListTweetAdapter;
 import br.com.caelum.twittelum_teste.dao.TweetDAO;
 import br.com.caelum.twittelum_teste.modelo.Tweet;
 
@@ -50,7 +51,7 @@ public class TweetListActivity extends AppCompatActivity {
 
     private void createList() {
         List<Tweet> tweets = dao.findAll();
-        ListAdapter adapter = new ArrayAdapter<Tweet>(this, android.R.layout.simple_list_item_1, tweets);
+        ListAdapter adapter = new ListTweetAdapter(this, tweets);
         ListView tweetList = findViewById(R.id.list_tweets);
         tweetList.setAdapter(adapter);
     }

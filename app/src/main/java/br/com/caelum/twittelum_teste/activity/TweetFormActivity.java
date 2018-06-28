@@ -24,6 +24,8 @@ public class TweetFormActivity extends AppCompatActivity {
         formHelper = new FormHelper(this);
         dao = new TweetDAO(TweetFormActivity.this);
 
+
+
         Button botao = formHelper.getButton();
         botao.setOnClickListener(new View.OnClickListener() {
             @Override

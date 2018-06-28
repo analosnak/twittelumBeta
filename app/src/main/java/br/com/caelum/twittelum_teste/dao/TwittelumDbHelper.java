@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static br.com.caelum.twittelum_teste.dao.TwittelumContract.Tweet.TABLE_NAME;
+
 /**
  * Created by analosnak on 15/06/2018.
  */
@@ -11,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TwittelumDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "TwittelumSQLite";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
 
     public TwittelumDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,7 +26,12 @@ public class TwittelumDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int versaoAntiga, int versaoNova) {
-        sqLiteDatabase.execSQL(TwittelumContract.Tweet.SQL_DELETE_QUERY);
-        onCreate(sqLiteDatabase);
+        switch (versaoAntiga) {
+            case 1:
+                sqLiteDatabase.execSQL(TwittelumContract.Tweet.SQL_UPDATE_1_2_QUERY1);
+            case 2:
+                sqLiteDatabase.execSQL(TwittelumContract.Tweet.SQL_UPDATE_1_2_QUERY2);
+                sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN teste;" );
+        }
     }
 }
