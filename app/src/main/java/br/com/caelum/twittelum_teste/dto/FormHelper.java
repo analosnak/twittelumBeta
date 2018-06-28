@@ -1,6 +1,7 @@
 package br.com.caelum.twittelum_teste.dto;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -68,6 +69,7 @@ public class FormHelper {
 
     public Tweet getTweet() {
         Tweet tweet = new Tweet();
+        tweet.setUserPhotoPath(photo.getTag().toString());
         tweet.setContent(contentInput.getText().toString());
         tweet.setPublishingDate(LocalDateTime.now());
 
@@ -86,7 +88,10 @@ public class FormHelper {
         contentInput.setText("");
     }
 
-    public void setUserPhoto(Bitmap userPhoto) {
-        this.photo.setImageBitmap(userPhoto);
+    public void setUserPhoto(String photoPathName) {
+        Bitmap imageBitmap = BitmapFactory.decodeFile(photoPathName);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(imageBitmap, 200, 200, true);
+        this.photo.setImageBitmap(scaledBitmap);
+        this.photo.setTag(photoPathName);
     }
 }

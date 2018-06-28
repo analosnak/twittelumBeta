@@ -1,6 +1,7 @@
 package br.com.caelum.twittelum_teste.adapter;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,11 @@ public class ListTweetAdapter extends BaseAdapter {
         Tweet tweet = tweets.get(position);
 
         ImageView photo = layout.findViewById(R.id.image_item);
-        photo.setImageResource(R.drawable.baseline_account_box_24);
+        if (tweet.getUserPhotoPath() != null) {
+            photo.setImageBitmap(BitmapFactory.decodeFile(tweet.getUserPhotoPath()));
+        } else {
+            photo.setImageResource(R.drawable.baseline_account_box_24);
+        }
 
         TextView contentView = layout.findViewById(R.id.text1_item);
         contentView.setText(tweet.getContent());
