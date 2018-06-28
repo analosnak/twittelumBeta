@@ -1,5 +1,6 @@
 package br.com.caelum.twittelum_teste.dto;
 
+import android.graphics.Bitmap;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -83,5 +84,9 @@ public class FormHelper {
 
     public void cleanInputs() {
         contentInput.setText("");
+    }
+
+    public void setUserPhoto(Bitmap userPhoto) {
+        this.photo.setImageBitmap(userPhoto);
     }
 }
