@@ -25,5 +25,6 @@ public class TwittelumDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int versaoAntiga, int versaoNova) {
         sqLiteDatabase.execSQL(TwittelumContract.Tweet.SQL_DELETE_QUERY);
+        onCreate(sqLiteDatabase);
     }
 }
