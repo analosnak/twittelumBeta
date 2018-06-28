@@ -1,6 +1,7 @@
 package br.com.caelum.twittelum_teste.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,13 @@ public class ListTweetAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View layout = activity.getLayoutInflater().inflate(R.layout.image_two_texts_list_item,parent,false);
+        View layout;
+        if (convertView != null) {
+            layout = convertView;
+            Log.i("REUSE", "reusando view");
+        } else {
+            layout = activity.getLayoutInflater().inflate(R.layout.image_two_texts_list_item, parent, false);
+        }
         Tweet tweet = tweets.get(position);
 
         ImageView photo = layout.findViewById(R.id.image_item);
